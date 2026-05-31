@@ -201,6 +201,32 @@
   display: block;
 }
 
+.option-image {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  background: var(--paper-shade);
+}
+
+.option-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.option-youtube {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.option-youtube iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
 .pair-option .option-text {
   font-family: var(--font-body);
   font-size: var(--size-sm);
