@@ -1,4 +1,3 @@
-# econ1626-ai-future-forecast
 # When Productivity Is Not Enough
 
 *Forecasting AI's reshaping of the creative economy, 2026–2030.*
