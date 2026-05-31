@@ -9,14 +9,14 @@
       "options": [
         {
           "key": "A",
-          "src": "assets/images/quiz/visual-a.jpg",
+          "src": "asset/images/visual-a.jpg",
           "alt": "Portrait painting A",
           "isHuman": true,
           "credit": "Human-painted oil portrait"
         },
         {
           "key": "B",
-          "src": "assets/images/quiz/visual-b.png",
+          "src": "asset/images/visual-b.png",
           "alt": "Portrait painting B",
           "isHuman": false,
           "credit": "AI-generated (similar oil-painting style)"
