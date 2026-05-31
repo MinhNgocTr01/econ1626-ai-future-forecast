@@ -4,43 +4,45 @@
       "id": "visual",
       "domain": "Visual Art",
       "type": "image",
-      "question": "Which one was made by a human?",
+      "question": "Which one was painted by a human?",
+      "subQuestion": "Both are oil-painting style portraits. Look closely.",
       "options": [
         {
           "key": "A",
           "src": "assets/images/quiz/visual-a.jpg",
-          "alt": "Image A",
+          "alt": "Portrait painting A",
           "isHuman": true,
-          "credit": "Human artist: [add credit]"
+          "credit": "Human-painted oil portrait"
         },
         {
           "key": "B",
-          "src": "assets/images/quiz/visual-b.jpg",
-          "alt": "Image B",
+          "src": "assets/images/quiz/visual-b.png",
+          "alt": "Portrait painting B",
           "isHuman": false,
-          "credit": "AI: Midjourney V8"
+          "credit": "AI-generated (similar oil-painting style)"
         }
       ]
     },
     {
       "id": "music",
       "domain": "Music",
-      "type": "audio",
-      "question": "Which clip was performed by a human?",
+      "type": "youtube",
+      "question": "Which song was performed by humans?",
+      "subQuestion": "Both are titled 'Dust on/in the Wind' — both are soft rock with acoustic guitar.",
       "options": [
         {
           "key": "A",
-          "src": "assets/audio/quiz/music-a.mp3",
+          "videoId": "eQJ9IWoclhk",
           "alt": "Music clip A",
           "isHuman": false,
-          "credit": "AI: Suno v5.5"
+          "credit": "The Velvet Sundown — 'Dust on the Wind' (2025, AI-generated band)"
         },
         {
           "key": "B",
-          "src": "assets/audio/quiz/music-b.mp3",
+          "videoId": "9fNrJMkTWEE",
           "alt": "Music clip B",
           "isHuman": true,
-          "credit": "Human artist: [add credit]"
+          "credit": "Kansas — 'Dust in the Wind' (1977, written by Kerry Livgren)"
         }
       ]
     },
@@ -49,24 +51,25 @@
       "domain": "Writing",
       "type": "text",
       "question": "Which paragraph was written by a human?",
+      "subQuestion": "Both passages describe a morning. Read both carefully.",
       "options": [
         {
           "key": "A",
-          "text": "The morning had that particular thinness to it, the kind where you could feel autumn approaching but couldn't yet see it in the trees. My grandmother used to say September was the month when summer started apologizing for itself, and I think about that almost every year now, though she died eleven years ago and I never asked her what she meant.",
-          "isHuman": true,
-          "credit": "Human writer: [add credit]"
+          "text": "The morning unfolded with a delicate clarity, as if the season itself were caught between two states. Autumn whispered through the air, though the leaves remained stubbornly green. There is a certain quality to early September light that feels like a transition, a quiet acknowledgment that summer is ending and something else is beginning to take its place.",
+          "isHuman": false,
+          "credit": "AI-generated (Claude Opus 4.6)"
         },
         {
           "key": "B",
-          "text": "The morning unfolded with a delicate clarity, as if the season itself were caught between two states. Autumn whispered through the air, though the leaves remained stubbornly green. There is a certain quality to early September light that feels like a transition, a quiet acknowledgment that summer is ending and something else is beginning to take its place.",
-          "isHuman": false,
-          "credit": "AI: Claude Opus 4.6"
+          "text": "Mrs. Dalloway said she would buy the flowers herself. For Lucy had her work cut out for her. The doors would be taken off their hinges; Rumpelmayer's men were coming. And then, thought Clarissa Dalloway, what a morning — fresh as if issued to children on a beach.",
+          "isHuman": true,
+          "credit": "Virginia Woolf — opening of 'Mrs Dalloway' (1925)"
         }
       ]
     }
   ],
   "seedStats": {
-    "note": "These are illustrative aggregates drawn from cited research (NPR/Luminate 2026, Authors Guild 2025, Otis College 2026). The site does not collect personal data; your answers stay on your device.",
+    "note": "Aggregates are illustrative, drawn from cited research (NPR/Luminate 2026, Authors Guild 2025). Your answers stay on your device.",
     "visualGuessedWrong": 0.42,
     "musicGuessedWrong": 0.51,
     "writingGuessedWrong": 0.58,
