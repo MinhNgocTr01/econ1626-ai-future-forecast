@@ -17,22 +17,66 @@ function setProgress(round) {
   });
 }
 
-// Fixed: Changed to an async function to fetch data from the assets/data/quiz.json file
-async function startQuiz() {
-  try {
-    const res = await fetch('assets/data/quiz.json');
-    
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
+// Quiz data inlined — avoids CORS errors when opening from disk (file:// URLs
+// block fetch() even for local files, so we embed the data directly here).
+const QUIZ_DATA = {
+  pairs: [
+    {
+      id: 'visual',
+      domain: 'Visual Art',
+      type: 'image',
+      question: 'Which one was painted by a human?',
+      subQuestion: 'Both are oil-painting style portraits. Look closely.',
+      options: [
+        { key: 'A', src: 'asset/images/visual-a.jpg', alt: 'Portrait painting A', isHuman: true,  credit: 'Human-painted oil portrait' },
+        { key: 'B', src: 'asset/images/visual-b.png', alt: 'Portrait painting B', isHuman: false, credit: 'AI-generated (similar oil-painting style)' }
+      ]
+    },
+    {
+      id: 'music',
+      domain: 'Music',
+      type: 'youtube',
+      question: 'Which song was performed by humans?',
+      subQuestion: "Both are titled 'Dust on/in the Wind' — both are soft rock with acoustic guitar.",
+      options: [
+        { key: 'A', videoId: 'eQJ9IWoclhk', alt: 'Music clip A', isHuman: false, credit: "The Velvet Sundown — 'Dust on the Wind' (2025, AI-generated band)" },
+        { key: 'B', videoId: '9fNrJMkTWEE', alt: 'Music clip B', isHuman: true,  credit: "Kansas — 'Dust in the Wind' (1977, written by Kerry Livgren)" }
+      ]
+    },
+    {
+      id: 'writing',
+      domain: 'Writing',
+      type: 'text',
+      question: 'Which paragraph was written by a human?',
+      subQuestion: 'Both passages describe a morning. Read both carefully.',
+      options: [
+        {
+          key: 'A',
+          text: 'The morning unfolded with a delicate clarity, as if the season itself were caught between two states. Autumn whispered through the air, though the leaves remained stubbornly green. There is a certain quality to early September light that feels like a transition, a quiet acknowledgment that summer is ending and something else is beginning to take its place.',
+          isHuman: false,
+          credit: 'AI-generated (Claude Opus 4.6)'
+        },
+        {
+          key: 'B',
+          text: "Mrs. Dalloway said she would buy the flowers herself. For Lucy had her work cut out for her. The doors would be taken off their hinges; Rumpelmayer's men were coming. And then, thought Clarissa Dalloway, what a morning — fresh as if issued to children on a beach.",
+          isHuman: true,
+          credit: "Virginia Woolf — opening of 'Mrs Dalloway' (1925)"
+        }
+      ]
     }
-    
-    quizData = await res.json();
-  } catch (e) {
-    $('#quiz-stage').innerHTML = '<p style="text-align:center;padding:2rem;">Quiz data did not load. Please <a href="forecast.html">skip to the essay</a>.</p>';
-    console.error('Failed to load quiz data from assets/data/quiz.json:', e);
-    return;
+  ],
+  seedStats: {
+    note: 'Aggregates are illustrative, drawn from cited research (NPR/Luminate 2026, Authors Guild 2025). Your answers stay on your device.',
+    visualGuessedWrong: 0.42,
+    musicGuessedWrong:  0.51,
+    writingGuessedWrong: 0.58,
+    preferenceShifted: 0.61,
+    medianWtpHuman: 12
   }
+};
 
+function startQuiz() {
+  quizData = QUIZ_DATA;
   currentRound = 1;
   currentPairIndex = 0;
   selections = [];
@@ -55,7 +99,7 @@ function renderOptionMedia(pair, opt) {
         title="${opt.alt}"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-        referpolicy="strict-origin-when-cross-origin"
+        referrerpolicy="strict-origin-when-cross-origin"
       ></iframe>
     </div>`;
   }
@@ -283,9 +327,9 @@ function renderResults() {
 
   let openingLine;
   if (correctCount === 3) {
-    openingLine = "You got all three right.";
+    openingLine = 'You got all three right.';
   } else if (correctCount === 0) {
-    openingLine = "You got none of them right.";
+    openingLine = 'You got none of them right.';
   } else {
     openingLine = `You got ${correctCount} of ${totalGuesses} right.`;
   }
