@@ -17,13 +17,22 @@ function setProgress(round) {
   });
 }
 
-function startQuiz() {
-  if (!window.QUIZ_DATA) {
+// Fixed: Changed to an async function to fetch data from the assets/data/quiz.json file
+async function startQuiz() {
+  try {
+    const res = await fetch('assets/data/quiz.json');
+    
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    
+    quizData = await res.json();
+  } catch (e) {
     $('#quiz-stage').innerHTML = '<p style="text-align:center;padding:2rem;">Quiz data did not load. Please <a href="forecast.html">skip to the essay</a>.</p>';
-    console.error('window.QUIZ_DATA is undefined. Make sure quiz-data.js is loaded before quiz.js.');
+    console.error('Failed to load quiz data from assets/data/quiz.json:', e);
     return;
   }
-  quizData = window.QUIZ_DATA;
+
   currentRound = 1;
   currentPairIndex = 0;
   selections = [];
@@ -46,7 +55,7 @@ function renderOptionMedia(pair, opt) {
         title="${opt.alt}"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-        referrerpolicy="strict-origin-when-cross-origin"
+        referpolicy="strict-origin-when-cross-origin"
       ></iframe>
     </div>`;
   }
