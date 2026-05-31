@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +8,10 @@
   <meta name="description" content="A forecast of AI's reshaping of the creative economy, 2026–2030." />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
+<body>
 
-  
   <header class="site-header">
     <div class="site-header-inner">
       <a href="index.html" class="site-title">When Productivity Is Not Enough</a>
@@ -23,7 +25,6 @@
 
   <main class="essay-body">
 
-    <!-- HERO -->
     <section class="hero">
       <div class="prose">
         <span class="label fade-in fade-in-1">A Forecast · 2026–2030</span>
@@ -39,7 +40,6 @@
       </div>
     </section>
 
-     <!-- THESIS -->
     <section id="thesis">
       <div class="section-intro">
         <span class="label">01 — Thesis</span>
@@ -59,7 +59,6 @@
         <p>This is what makes generative AI culturally significant. For the first time, society is confronting a technology capable of reproducing the appearance of human expression without the human experience that traditionally gave that expression meaning. As synthetic content becomes abundant and increasingly indistinguishable from human created work, the central question is no longer whether AI can make art. It is whether authorship itself remains economically and culturally valuable once expression can exist without an expressive mind behind it.</p>
       </div>
 
-      <!-- VIZ: Instrumental/expressive split-screen -->
       <div class="viz-container">
         <div class="split-question">Which one feels okay to be made by AI?</div>
         <div class="split-screen" id="split-instrumental-expressive">
@@ -78,8 +77,6 @@
       </div>
     </section>
 
-
-     <!-- LITERATURE REVIEW -->
     <section id="literature">
       <div class="section-intro">
         <span class="label">02 — Literature Review</span>
@@ -94,7 +91,6 @@
       </div>
     </section>
 
-    <!-- BASELINE -->
     <section id="baseline">
       <div class="section-intro">
         <span class="label">03 — Baseline</span>
@@ -102,7 +98,6 @@
         <p style="font-style:italic;color:var(--ink-mute);max-width:32em;margin:0 auto;">The industry is mid-disruption. Old structures are breaking. New ones have not yet formed.</p>
       </div>
 
-      <!-- VIZ: Baseline dashboard -->
       <div class="baseline-grid">
         <div class="baseline-card">
           <div class="domain">Visual art</div>
@@ -132,3 +127,1210 @@
         <p>On policy, EU AI Act Article 50 enforcement began in 2026, requiring machine-readable labeling of AI content in European markets. C2PA has been adopted by Adobe, Microsoft, Google, Sony, Canon, and Nikon. Whether this reaches consumers is the open question. <em>This is where the forecast starts.</em></p>
       </div>
     </section>
+
+    <section id="forecast">
+      <div class="section-intro">
+        <span class="label">04 — The Forecast</span>
+        <h2>Now to mid-2027</h2>
+      </div>
+
+      <div class="prose">
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q3 2026</span>
+            <span class="quarter-title">The Disclosure Threshold</span>
+          </div>
+          <p>EU enforcement begins. Because platforms operate globally, the labeling rule reaches everyone. C2PA-verified human work begins commanding higher prices on stock platforms. This is the first test of whether people who say they value human-made work actually choose it when they can see the difference. If they do, a premium forms. If they keep clicking regardless, the label means nothing. Writing is hardest to label: a writer who edits every sentence of AI output and one who prompts and publishes are both "AI-assisted," and no regulation can tell them apart.</p>
+        </div>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q4 2026</span>
+            <span class="quarter-title">The Copyright Settlement Wave</span>
+          </div>
+          <p>The Sony Music v. Suno ruling lands. OpenAI cases reach discovery. The Anthropic settlement ($1.5 billion, approximately $3,000 per work) sets the going rate. A licensing wave follows: rights holders who win sell their catalogues as training data; those who lose build their own AI products, Disney's $1 billion OpenAI deal being the clearest example. But the money goes to publishers, labels, and studios, not creators. The illustrator whose portfolio trained a model sees none of the $3,000. Where the money lands matters more than how much there is.</p>
+
+          <div class="viz-container" id="viz-sankey">
+            <style>
+              @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=JetBrains+Mono:wght@400;500&display=swap');
+              :root {
+                --paper:#FAF7F2;--paper-shade:#F2EDE3;--ink:#1A1816;--ink-soft:#3D3935;--ink-mute:#6B6661;--ink-faint:#A8A29A;
+                --line:#D9D2C5;--line-soft:#E8E1D4;--rust:#B45F3D;--rust-soft:#D4906B;--rust-faint:rgba(180,95,61,0.08);
+                --sage:#6B7F5C;--sage-soft:#94A082;--sage-faint:rgba(107,127,92,0.08);
+                --font-display:'Fraunces',Georgia,serif;--font-mono:'JetBrains Mono','Courier New',monospace;
+                --size-mono:0.8rem;
+              }
+              .sankey-wrap { font-family: var(--font-mono); color: var(--ink); padding: 0; }
+              .sankey-caption { font-family: var(--font-mono); font-size: var(--size-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); text-align: center; margin-top: 1rem; }
+              .sankey-legend { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
+              .sankey-legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); }
+              .sankey-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+              .sankey-tooltip {
+                position: absolute; pointer-events: none; opacity: 0; transition: opacity 0.2s;
+                background: var(--ink); color: var(--paper); padding: 8px 12px;
+                font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em;
+                white-space: nowrap; z-index: 10;
+              }
+              svg text { font-family: 'JetBrains Mono', monospace; }
+              .flow-path { cursor: pointer; transition: opacity 0.2s; }
+              .flow-path:hover { opacity: 0.85 !important; }
+              .node-group { cursor: default; }
+            </style>
+
+            <div class="sankey-wrap">
+              <div class="sankey-legend">
+                <div class="sankey-legend-item"><div class="sankey-legend-dot" style="background:#B45F3D"></div>AI companies</div>
+                <div class="sankey-legend-item"><div class="sankey-legend-dot" style="background:#6B7F5C"></div>Rights holders</div>
+                <div class="sankey-legend-item"><div class="sankey-legend-dot" style="background:#A8A29A"></div>Individual creators</div>
+              </div>
+
+              <div style="position:relative">
+                <div class="sankey-tooltip" id="sankey-tt"></div>
+                <svg id="sankey" width="100%" viewBox="0 0 760 460" style="display:block"></svg>
+              </div>
+
+              <div class="sankey-caption">Settlement flow — $1.5B Anthropic settlement (illustrative allocation)</div>
+            </div>
+
+            <script>
+            (() => {
+              const SVG_NS = 'http://www.w3.org/2000/svg';
+
+              const nodes = [
+                { id:'anthropic', label:'Anthropic', sub:'$1.5B settlement', x:40, y:160, w:130, h:120, color:'#B45F3D', textColor:'#FAF7F2', tier:0 },
+                { id:'publishers', label:'Publishers', sub:'$720M · 48%', x:320, y:30, w:130, h:72, color:'#6B7F5C', textColor:'#FAF7F2', tier:1 },
+                { id:'labels', label:'Record labels', sub:'$450M · 30%', x:320, y:130, w:130, h:72, color:'#6B7F5C', textColor:'#FAF7F2', tier:1 },
+                { id:'studios', label:'Film & TV studios', sub:'$285M · 19%', x:320, y:230, w:130, h:72, color:'#6B7F5C', textColor:'#FAF7F2', tier:1 },
+                { id:'other_rh', label:'Other rights holders', sub:'$45M · 3%', x:320, y:330, w:130, h:56, color:'#94A082', textColor:'#FAF7F2', tier:1 },
+                { id:'authors', label:'Authors & writers', sub:'~$4,200', x:600, y:20, w:140, h:52, color:'#D9D2C5', textColor:'#3D3935', tier:2 },
+                { id:'illustrators', label:'Illustrators', sub:'~$3,000', x:600, y:90, w:140, h:52, color:'#D9D2C5', textColor:'#3D3935', tier:2 },
+                { id:'musicians', label:'Musicians', sub:'~$1,800', x:600, y:160, w:140, h:52, color:'#D9D2C5', textColor:'#3D3935', tier:2 },
+                { id:'filmmakers', label:'Filmmakers', sub:'~$900', x:600, y:230, w:140, h:52, color:'#D9D2C5', textColor:'#3D3935', tier:2 },
+                { id:'none', label:'Most creators', sub:'$0', x:600, y:330, w:140, h:80, color:'#1A1816', textColor:'#FAF7F2', tier:2 },
+              ];
+
+              const flows = [
+                { from:'anthropic', to:'publishers', value:720, note:'Book & article publishers receive the largest share' },
+                { from:'anthropic', to:'labels', value:450, note:'Major labels (Sony, Universal, Warner) distribute internally' },
+                { from:'anthropic', to:'studios', value:285, note:'Studios retain all funds — no creator pass-through required' },
+                { from:'anthropic', to:'other_rh', value:45, note:'Smaller rights holders, news orgs, academic publishers' },
+                { from:'publishers', to:'authors', value:18, note:'~$4,200 per work — reaches only works with active contracts' },
+                { from:'publishers', to:'illustrators', value:9, note:'Per-work rate: illustrators receive less than authors' },
+                { from:'publishers', to:'none', value:693, note:'Retained by publishers as corporate revenue' },
+                { from:'labels', to:'musicians', value:27, note:'Only artists with recouped advances see any payment' },
+                { from:'labels', to:'none', value:423, note:'Labels absorb most settlement — session musicians get nothing' },
+                { from:'studios', to:'filmmakers', value:14, note:'Directors and writers with residual clauses may qualify' },
+                { from:'studios', to:'none', value:271, note:'Below-the-line crew, extras, independent contractors: $0' },
+                { from:'other_rh', to:'none', value:45, note:'Proceeds retained at the institutional level' },
+              ];
+
+              const TOTAL = 1500;
+
+              function nodeById(id) { return nodes.find(n => n.id === id); }
+
+              function buildSankey() {
+                const svg = document.getElementById('sankey');
+                const defs = document.createElementNS(SVG_NS, 'defs');
+                svg.appendChild(defs);
+
+                const sourceOffsets = {};
+                const targetOffsets = {};
+                nodes.forEach(n => { sourceOffsets[n.id] = 0; targetOffsets[n.id] = 0; });
+
+                const nodeOutTotal = {};
+                const nodeInTotal = {};
+                nodes.forEach(n => { nodeOutTotal[n.id] = 0; nodeInTotal[n.id] = 0; });
+                flows.forEach(f => {
+                  nodeOutTotal[f.from] = (nodeOutTotal[f.from] || 0) + f.value;
+                  nodeInTotal[f.to] = (nodeInTotal[f.to] || 0) + f.value;
+                });
+
+                flows.forEach((f, i) => {
+                  const src = nodeById(f.from);
+                  const tgt = nodeById(f.to);
+                  if (!src || !tgt) return;
+
+                  const srcH = src.h * (f.value / (nodeOutTotal[src.id] || f.value));
+                  const tgtH = tgt.h * (f.value / (nodeInTotal[tgt.id] || f.value));
+
+                  const srcY = src.y + sourceOffsets[src.id];
+                  const tgtY = tgt.y + targetOffsets[tgt.id];
+
+                  sourceOffsets[src.id] += srcH;
+                  targetOffsets[tgt.id] += tgtH;
+
+                  const x1 = src.x + src.w;
+                  const x2 = tgt.x;
+                  const cx = (x1 + x2) / 2;
+
+                  const opacity = Math.max(0.12, Math.min(0.72, 0.15 + (f.value / TOTAL) * 1.8));
+                  const col = src.color;
+
+                  const gradId = `g${i}`;
+                  const grad = document.createElementNS(SVG_NS, 'linearGradient');
+                  grad.setAttribute('id', gradId);
+                  grad.setAttribute('x1', '0'); grad.setAttribute('x2', '1');
+                  grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+                  grad.setAttribute('x1', x1); grad.setAttribute('x2', x2);
+                  const s1 = document.createElementNS(SVG_NS, 'stop');
+                  s1.setAttribute('offset', '0%'); s1.setAttribute('stop-color', src.color); s1.setAttribute('stop-opacity', opacity);
+                  const s2 = document.createElementNS(SVG_NS, 'stop');
+                  s2.setAttribute('offset', '100%'); s2.setAttribute('stop-color', tgt.color); s2.setAttribute('stop-opacity', opacity * 0.7);
+                  grad.appendChild(s1); grad.appendChild(s2);
+                  defs.appendChild(grad);
+
+                  const path = document.createElementNS(SVG_NS, 'path');
+                  const d = `M${x1},${srcY} C${cx},${srcY} ${cx},${tgtY} ${x2},${tgtY} L${x2},${tgtY + tgtH} C${cx},${tgtY + tgtH} ${cx},${srcY + srcH} ${x1},${srcY + srcH} Z`;
+                  path.setAttribute('d', d);
+                  path.setAttribute('fill', `url(#${gradId})`);
+                  path.setAttribute('class', 'flow-path');
+                  path.setAttribute('data-note', f.note);
+                  path.setAttribute('data-val', `$${f.value}M`);
+
+                  path.addEventListener('mouseenter', (e) => showTip(e, `$${f.value}M — ${f.note}`));
+                  path.addEventListener('mouseleave', hideTip);
+                  path.addEventListener('mousemove', moveTip);
+
+                  svg.appendChild(path);
+                });
+
+                nodes.forEach(n => {
+                  const g = document.createElementNS(SVG_NS, 'g');
+                  g.setAttribute('class', 'node-group');
+
+                  const rect = document.createElementNS(SVG_NS, 'rect');
+                  rect.setAttribute('x', n.x); rect.setAttribute('y', n.y);
+                  rect.setAttribute('width', n.w); rect.setAttribute('height', n.h);
+                  rect.setAttribute('rx', 2);
+                  rect.setAttribute('fill', n.color);
+                  g.appendChild(rect);
+
+                  const label = document.createElementNS(SVG_NS, 'text');
+                  label.setAttribute('x', n.x + n.w / 2);
+                  label.setAttribute('y', n.h > 60 ? n.y + n.h / 2 - 8 : n.y + n.h / 2 - 6);
+                  label.setAttribute('text-anchor', 'middle');
+                  label.setAttribute('dominant-baseline', 'central');
+                  label.setAttribute('fill', n.textColor);
+                  label.setAttribute('font-size', '11');
+                  label.setAttribute('font-weight', '500');
+                  label.setAttribute('letter-spacing', '0.05');
+                  label.textContent = n.label;
+                  g.appendChild(label);
+
+                  const sub = document.createElementNS(SVG_NS, 'text');
+                  sub.setAttribute('x', n.x + n.w / 2);
+                  sub.setAttribute('y', n.h > 60 ? n.y + n.h / 2 + 10 : n.y + n.h / 2 + 8);
+                  sub.setAttribute('text-anchor', 'middle');
+                  sub.setAttribute('dominant-baseline', 'central');
+                  sub.setAttribute('fill', n.textColor);
+                  sub.setAttribute('font-size', '9.5');
+                  sub.setAttribute('opacity', '0.75');
+                  sub.textContent = n.sub;
+                  g.appendChild(sub);
+
+                  svg.appendChild(g);
+                });
+
+                const tierLabels = [
+                  { label: 'AI COMPANY', x: 105, y: 18 },
+                  { label: 'RIGHTS HOLDERS', x: 385, y: 18 },
+                  { label: 'INDIVIDUAL CREATORS', x: 670, y: 18 },
+                ];
+                tierLabels.forEach(tl => {
+                  const t = document.createElementNS(SVG_NS, 'text');
+                  t.setAttribute('x', tl.x); t.setAttribute('y', tl.y);
+                  t.setAttribute('text-anchor', 'middle');
+                  t.setAttribute('fill', '#A8A29A');
+                  t.setAttribute('font-size', '8');
+                  t.setAttribute('letter-spacing', '0.12');
+                  t.textContent = tl.label;
+                  svg.appendChild(t);
+                });
+              }
+
+              function showTip(e, msg) {
+                const tt = document.getElementById('sankey-tt');
+                tt.textContent = msg;
+                tt.style.opacity = '1';
+                moveTip(e);
+              }
+              function hideTip() { document.getElementById('sankey-tt').style.opacity = '0'; }
+              function moveTip(e) {
+                const tt = document.getElementById('sankey-tt');
+                const wrap = tt.parentElement;
+                const rect = wrap.getBoundingClientRect();
+                let x = e.clientX - rect.left + 12;
+                let y = e.clientY - rect.top - 36;
+                if (x + 280 > rect.width) x = e.clientX - rect.left - 280;
+                tt.style.left = x + 'px';
+                tt.style.top = y + 'px';
+              }
+
+              buildSankey();
+            })();
+            </script>
+          </div>
+        </div>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q1 2027</span>
+            <span class="quarter-title">Music Reaches the Tipping Point</span>
+          </div>
+          <p>AI music becomes indistinguishable in most popular genres, and the AI share of uploads could pass 50% on unfiltered platforms. Because streaming royalties come from one shared pool, every AI stream takes a slice from a human artist. Each uploader benefits while the system degrades for everyone. This is the moment one major platform, likely Deezer, separates AI tracks from human ones, either into a different library or behind a verification requirement.</p>
+
+          <div class="viz-container" id="viz-timeline">
+            <style>
+              .mtp-wrap { font-family: var(--font-mono); color: var(--ink); background: transparent; }
+              .mtp-controls { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+              .mtp-ctrl-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-mute); margin-bottom: 6px; }
+              .mtp-slider-row { display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 200px; }
+              .mtp-slider-row input[type=range] { flex: 1; accent-color: var(--rust); }
+              .mtp-val { font-size: 0.75rem; color: var(--rust); font-weight: 500; min-width: 2.5rem; text-align: right; }
+              .mtp-chart-wrap { position: relative; }
+              .mtp-chart-wrap canvas { display: block; width: 100%; height: 260px; }
+              .mtp-milestone-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
+              .mtp-milestone { border-left: 2px solid var(--line); padding: 0.5rem 0.75rem; transition: border-color 0.3s; }
+              .mtp-milestone.active { border-left-color: var(--rust); }
+              .mtp-milestone .mtp-m-time { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-mute); margin-bottom: 0.2rem; }
+              .mtp-milestone .mtp-m-label { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.4; }
+              .mtp-milestone.active .mtp-m-label { color: var(--ink); }
+              .mtp-legend-row { display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+              .mtp-leg { display: flex; align-items: center; gap: 6px; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); }
+              .mtp-leg-line { width: 20px; height: 2px; flex-shrink: 0; }
+              .mtp-leg-line.human { background: var(--sage); }
+              .mtp-leg-line.ai { background: var(--rust); }
+              .mtp-leg-line.pool { background: var(--ink-faint); height: 1px; border-top: 1px dashed #A8A29A; }
+              .mtp-caption { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); text-align: center; margin-top: 1rem; }
+            </style>
+
+            <div class="mtp-wrap">
+              <div class="mtp-controls">
+                <div>
+                  <div class="mtp-ctrl-label">AI upload growth rate</div>
+                  <div class="mtp-slider-row">
+                    <span style="font-size:0.68rem;color:var(--ink-mute)">Slow</span>
+                    <input type="range" id="growth" min="1.2" max="2.5" step="0.05" value="1.7">
+                    <span style="font-size:0.68rem;color:var(--ink-mute)">Fast</span>
+                    <span class="mtp-val" id="growth-val">×1.7/qtr</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="mtp-ctrl-label">Streaming pool size</div>
+                  <div class="mtp-slider-row">
+                    <span style="font-size:0.68rem;color:var(--ink-mute)">Flat</span>
+                    <input type="range" id="pool" min="0" max="8" step="1" value="3">
+                    <span style="font-size:0.68rem;color:var(--ink-mute)">+20%</span>
+                    <span class="mtp-val" id="pool-val">+9%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mtp-legend-row">
+                <div class="mtp-leg"><div class="mtp-leg-line human"></div>Human uploads (share)</div>
+                <div class="mtp-leg"><div class="mtp-leg-line ai"></div>AI uploads (share)</div>
+                <div class="mtp-leg"><div class="mtp-leg-line pool"></div>Per-stream royalty rate</div>
+              </div>
+
+              <div class="mtp-chart-wrap">
+                <canvas id="mtp-c"></canvas>
+              </div>
+
+              <div class="mtp-milestone-list">
+                <div class="mtp-milestone" id="m0">
+                  <div class="mtp-m-time">Q3 2025 — Baseline</div>
+                  <div class="mtp-m-label">AI uploads ~8% of new tracks. Royalty pool distributes normally.</div>
+                </div>
+                <div class="mtp-milestone" id="m1">
+                  <div class="mtp-m-time">Q1 2026 — Acceleration</div>
+                  <div class="mtp-m-label">AI tools democratise. Upload velocity doubles. Labels file injunctions.</div>
+                </div>
+                <div class="mtp-milestone" id="m2">
+                  <div class="mtp-m-time">Q3 2026 — EU labels</div>
+                  <div class="mtp-m-label">C2PA tagging required. Platforms begin separating catalogues.</div>
+                </div>
+                <div class="mtp-milestone" id="m3">
+                  <div class="mtp-m-time">Q1 2027 — Tipping point</div>
+                  <div class="mtp-m-label">AI passes 50% of uploads. Deezer separates libraries. Royalty rate collapses.</div>
+                </div>
+              </div>
+
+              <div class="mtp-caption">Drag sliders to model different scenarios — per-stream rate falls as AI share rises</div>
+            </div>
+
+            <script>
+            (() => {
+              const quarters = ['Q3 2025','Q4 2025','Q1 2026','Q2 2026','Q3 2026','Q4 2026','Q1 2027','Q2 2027'];
+              const milestoneQtrs = [0, 2, 4, 6];
+
+              function computeData(growthRate, poolGrowth) {
+                const poolGrowthPct = poolGrowth / 100;
+                let aiShare = 0.08;
+                const aiShares = [], humanShares = [], royaltyRates = [];
+
+                for (let i = 0; i < quarters.length; i++) {
+                  aiShares.push(+(aiShare * 100).toFixed(1));
+                  humanShares.push(+((1 - aiShare) * 100).toFixed(1));
+                  const poolFactor = Math.pow(1 + poolGrowthPct, i);
+                  const dilution = 1 - (aiShare * 0.6);
+                  royaltyRates.push(+(dilution * poolFactor * 100).toFixed(1));
+                  aiShare = Math.min(0.92, aiShare * growthRate);
+                }
+                return { aiShares, humanShares, royaltyRates };
+              }
+
+              let chartInstance;
+              const rust = '#B45F3D', sage = '#6B7F5C', faint = '#A8A29A';
+
+              function initChart() {
+                const ctx = document.getElementById('mtp-c').getContext('2d');
+                const d = computeData(1.7, 9);
+
+                chartInstance = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                    labels: quarters,
+                    datasets: [
+                      {
+                        label: 'Human share %',
+                        data: d.humanShares,
+                        backgroundColor: sage + '33',
+                        borderColor: sage,
+                        borderWidth: 1.5,
+                        borderRadius: 2,
+                        stack: 'shares',
+                      },
+                      {
+                        label: 'AI share %',
+                        data: d.aiShares,
+                        backgroundColor: rust + '44',
+                        borderColor: rust,
+                        borderWidth: 1.5,
+                        borderRadius: 2,
+                        stack: 'shares',
+                      },
+                      {
+                        label: 'Royalty rate (indexed)',
+                        data: d.royaltyRates,
+                        type: 'line',
+                        yAxisID: 'y2',
+                        borderColor: faint,
+                        borderDash: [4, 3],
+                        borderWidth: 1.5,
+                        pointBackgroundColor: faint,
+                        pointRadius: 3,
+                        tension: 0.4,
+                        fill: false,
+                        stack: undefined,
+                      }
+                    ]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                      legend: { display: false },
+                      tooltip: {
+                        backgroundColor: '#1A1816',
+                        titleFont: { family: "'JetBrains Mono'", size: 10 },
+                        bodyFont:  { family: "'JetBrains Mono'", size: 10 },
+                        padding: 10,
+                        callbacks: {
+                          label(ctx) {
+                            if (ctx.dataset.label.includes('Royalty')) return `  Royalty rate: ${ctx.parsed.y.toFixed(0)} (indexed)`;
+                            return `  ${ctx.dataset.label}: ${ctx.parsed.y.toFixed(0)}%`;
+                          }
+                        }
+                      }
+                    },
+                    scales: {
+                      x: {
+                        stacked: true,
+                        grid: { color: '#D9D2C520' },
+                        ticks: { font: { family: "'JetBrains Mono'", size: 9 }, color: '#6B6661' }
+                      },
+                      y: {
+                        stacked: true,
+                        max: 100,
+                        grid: { color: '#D9D2C530' },
+                        ticks: { font: { family: "'JetBrains Mono'", size: 9 }, color: '#6B6661', callback: v => v + '%' }
+                      },
+                      y2: {
+                        position: 'right',
+                        min: 0,
+                        max: 130,
+                        grid: { display: false },
+                        ticks: { font: { family: "'JetBrains Mono'", size: 9 }, color: '#A8A29A', callback: v => v }
+                      }
+                    },
+                    animation: { duration: 400 }
+                  }
+                });
+              }
+
+              function updateChart() {
+                const growth = parseFloat(document.getElementById('growth').value);
+                const pool = parseInt(document.getElementById('pool').value);
+                const poolPct = [0,1,3,5,7,9,12,15,18,20][pool];
+
+                document.getElementById('growth-val').textContent = '×' + growth.toFixed(2) + '/qtr';
+                document.getElementById('pool-val').textContent = '+' + poolPct + '%';
+
+                const d = computeData(growth, poolPct);
+                chartInstance.data.datasets[0].data = d.humanShares;
+                chartInstance.data.datasets[1].data = d.aiShares;
+                chartInstance.data.datasets[2].data = d.royaltyRates;
+                chartInstance.update();
+
+                const tipIdx = d.aiShares.findIndex(v => v >= 50);
+                milestoneQtrs.forEach((qi, mi) => {
+                  const el = document.getElementById('m' + mi);
+                  if (el) el.classList.toggle('active', qi <= (tipIdx === -1 ? 999 : tipIdx));
+                });
+              }
+
+              document.getElementById('growth').addEventListener('input', updateChart);
+              document.getElementById('pool').addEventListener('input', updateChart);
+
+              initChart();
+              updateChart();
+            })();
+            </script>
+          </div>
+        </div>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q2 2027</span>
+            <span class="quarter-title">Writing Approaches the Tipping Point</span>
+          </div>
+          <p>AI long-form text becomes hard to distinguish in genre fiction and commercial work. Writing differs from music and visual art in one way: the harm is invisible. A client never announces the switch, so the displacement is real but unseen. And what no one sees, no one protests. Upwork shows it anyway: writing projects fell 32% year-on-year into 2025. Routine work (SEO, product descriptions) is automating; specialist work (investigative journalism, literary fiction) holds and sometimes pays more. The instrumental / expressive split is showing up in prices.</p>
+
+          <div class="viz-container" id="viz-invisibility">
+            <style>
+              .trip-wrap { font-family: var(--font-mono); background: transparent; color: var(--ink); }
+              .trip-triptych { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+              .trip-panel { background: var(--paper); padding: 0; display: flex; flex-direction: column; cursor: pointer; transition: background 0.25s; }
+              .trip-panel:hover { background: var(--paper-shade); }
+              .trip-panel.active { background: var(--paper-shade); }
+              .trip-panel-art { height: 200px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+              .trip-panel-art svg { display: block; }
+              .trip-panel-meta { padding: 1rem; border-top: 1px solid var(--line-soft); }
+              .trip-panel-domain { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-mute); margin-bottom: 0.3rem; }
+              .trip-panel-title { font-family: var(--font-display); font-size: 1rem; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+              .trip-panel-sub { font-size: 0.68rem; color: var(--ink-mute); line-height: 1.5; }
+              .trip-detail { display: none; border-top: 1px solid var(--line); background: var(--paper-shade); padding: 1.25rem 1.5rem; }
+              .trip-detail.open { display: block; }
+              .trip-detail-inner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+              .trip-detail-col .trip-d-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-mute); margin-bottom: 0.5rem; }
+              .trip-detail-col .trip-d-stat { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+              .trip-detail-col .trip-d-note { font-size: 0.7rem; color: var(--ink-mute); line-height: 1.45; font-style: italic; }
+              .trip-detail-col.highlight .trip-d-stat { color: var(--rust); }
+              .trip-visibility-bar { display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+              .trip-vb-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); white-space: nowrap; }
+              .trip-vb-track { flex: 1; height: 4px; background: var(--line); position: relative; }
+              .trip-vb-fill { height: 100%; transition: width 0.5s var(--ease); }
+              .trip-caption { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); text-align: center; margin-top: 1rem; }
+
+              @media(max-width: 600px) {
+                .trip-triptych { grid-template-columns: 1fr; }
+                .trip-detail-inner { grid-template-columns: 1fr; }
+                .trip-panel-art { height: 140px; }
+              }
+
+              @keyframes float-up{0%{opacity:0.6;transform:translateY(0)}50%{opacity:1;transform:translateY(-6px)}100%{opacity:0.6;transform:translateY(0)}}
+              @keyframes pulse-red{0%,100%{opacity:0.6}50%{opacity:1}}
+              @keyframes blink-cursor{0%,100%{opacity:1}50%{opacity:0}}
+              @media(prefers-reduced-motion:no-preference){
+                .float { animation: float-up 3s ease-in-out infinite; }
+                .pulse { animation: pulse-red 2s ease-in-out infinite; }
+                .cursor { animation: blink-cursor 1.1s step-end infinite; }
+              }
+            </style>
+
+            <div class="trip-wrap">
+              <div class="trip-triptych" id="trip-triptych">
+
+                <div class="trip-panel" data-panel="0" onclick="window.openTripPanel(0)">
+                  <div class="trip-panel-art" style="background:#F2EDE3;">
+                    <svg width="160" height="160" viewBox="0 0 160 160">
+                      <rect x="20" y="20" width="120" height="90" rx="3" fill="#FAF7F2" stroke="#D9D2C5" stroke-width="1"/>
+                      <rect x="30" y="30" width="48" height="48" rx="2" fill="#D4906B" opacity="0.4"/>
+                      <rect x="84" y="30" width="48" height="22" rx="2" fill="#D9D2C5" opacity="0.6"/>
+                      <rect x="84" y="58" width="30" height="20" rx="2" fill="#D9D2C5" opacity="0.4"/>
+                      <rect x="20" y="98" width="120" height="22" rx="0" fill="#B45F3D"/>
+                      <text x="80" y="113" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#FAF7F2" letter-spacing="0.1">AI-GENERATED · C2PA FLAGGED</text>
+                      <g class="pulse">
+                        <polygon points="128,26 136,40 120,40" fill="#B45F3D" opacity="0.9"/>
+                        <text x="128" y="38" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#FAF7F2" font-weight="500">!</text>
+                      </g>
+                      <rect x="20" y="126" width="56" height="16" rx="2" fill="#6B7F5C" opacity="0.15"/>
+                      <text x="48" y="137" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#6B7F5C" letter-spacing="0.05">✓ HUMAN</text>
+                      <text x="122" y="137" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#B45F3D" letter-spacing="0.05">AI COPY</text>
+                    </svg>
+                  </div>
+                  <div class="trip-panel-meta">
+                    <div class="trip-panel-domain">Visual art</div>
+                    <div class="trip-panel-title">Harm is visible</div>
+                    <div class="trip-panel-sub">C2PA metadata flags AI images. Stock platforms show the label. Buyers can choose.</div>
+                  </div>
+                </div>
+
+                <div class="trip-panel" data-panel="1" onclick="window.openTripPanel(1)">
+                  <div class="trip-panel-art" style="background:#F2EDE3;">
+                    <svg width="160" height="160" viewBox="0 0 160 160">
+                      <text x="80" y="26" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#A8A29A" letter-spacing="0.08">HUMAN TRACK</text>
+                      <polyline fill="none" stroke="#6B7F5C" stroke-width="1.5" points="18,48 26,38 32,52 38,35 44,55 50,40 56,50 62,36 68,54 74,38 80,48 86,34 92,52 98,42 104,56 110,38 116,50 122,40 128,55 134,44 142,48"/>
+                      <text x="80" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#A8A29A" letter-spacing="0.08">AI TRACK · LIBRARY B</text>
+                      <polyline fill="none" stroke="#B45F3D" stroke-width="1.5" stroke-dasharray="2 1" points="18,98 26,86 34,98 42,86 50,100 58,87 66,98 74,87 82,98 90,86 98,100 106,87 114,98 122,86 130,100 138,87 142,96"/>
+                      <rect x="18" y="116" width="124" height="10" rx="2" fill="#E8E1D4"/>
+                      <rect x="18" y="116" width="74" height="10" rx="2" fill="#6B7F5C" opacity="0.6" class="float"/>
+                      <rect x="92" y="116" width="50" height="10" rx="2" fill="#B45F3D" opacity="0.5"/>
+                      <text x="55" y="125" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" fill="#FAF7F2">Human 60%</text>
+                      <text x="117" y="125" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" fill="#FAF7F2">AI 40%</text>
+                      <text x="80" y="148" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#6B6661">Shared pool — each AI stream dilutes human royalty</text>
+                    </svg>
+                  </div>
+                  <div class="trip-panel-meta">
+                    <div class="trip-panel-domain">Music</div>
+                    <div class="trip-panel-title">Harm is visible</div>
+                    <div class="trip-panel-sub">AI tracks enter the same royalty pool. The math is legible. Platforms can separate libraries.</div>
+                  </div>
+                </div>
+
+                <div class="trip-panel" data-panel="2" onclick="window.openTripPanel(2)" style="background:#F5F1EA;">
+                  <div class="trip-panel-art" style="background:#EDE8DE;">
+                    <svg width="160" height="160" viewBox="0 0 160 160">
+                      <rect x="15" y="100" width="130" height="5" rx="1" fill="#D9D2C5"/>
+                      <rect x="20" y="105" width="4" height="30" fill="#D9D2C5"/>
+                      <rect x="136" y="105" width="4" height="30" fill="#D9D2C5"/>
+                      <rect x="58" y="78" width="44" height="24" rx="3" fill="none" stroke="#A8A29A" stroke-width="1" stroke-dasharray="3 2"/>
+                      <rect x="60" y="102" width="4" height="28" fill="none" stroke="#A8A29A" stroke-width="1" stroke-dasharray="3 2"/>
+                      <rect x="96" y="102" width="4" height="28" fill="none" stroke="#A8A29A" stroke-width="1" stroke-dasharray="3 2"/>
+                      <rect x="58" y="58" width="44" height="22" rx="3" fill="none" stroke="#A8A29A" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+                      <rect x="30" y="88" width="14" height="12" rx="1" fill="none" stroke="#D9D2C5" stroke-width="1"/>
+                      <path d="M44,93 Q50,92 50,96 Q50,100 44,99" fill="none" stroke="#D9D2C5" stroke-width="1"/>
+                      <rect x="72" y="80" width="50" height="20" rx="2" fill="#D9D2C5" opacity="0.3"/>
+                      <rect x="74" y="82" width="46" height="16" rx="1" fill="#E8E1D4"/>
+                      <rect x="80" y="87" width="1.5" height="8" rx="0.5" fill="#A8A29A" class="cursor"/>
+                      <text x="80" y="52" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#A8A29A" letter-spacing="0.05" opacity="0.7">no announcement</text>
+                      <text x="80" y="63" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#A8A29A" letter-spacing="0.05" opacity="0.5">no protest</text>
+                      <text x="80" y="73" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#A8A29A" letter-spacing="0.05" opacity="0.3">no record</text>
+                    </svg>
+                  </div>
+                  <div class="trip-panel-meta">
+                    <div class="trip-panel-domain">Writing</div>
+                    <div class="trip-panel-title">Harm is invisible</div>
+                    <div class="trip-panel-sub">The client never announces the switch. No label, no flag, no displaced royalty to count.</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="trip-detail" id="trip-detail-0">
+                <div class="trip-detail-inner">
+                  <div class="trip-detail-col">
+                    <div class="trip-d-label">Mechanism of harm</div>
+                    <div class="trip-d-stat">Labelled</div>
+                    <div class="trip-d-note">C2PA metadata embeds proof of origin. Platforms display it. Buyers see the flag and can choose human work at a premium.</div>
+                  </div>
+                  <div class="trip-detail-col highlight">
+                    <div class="trip-d-label">Visibility score</div>
+                    <div class="trip-d-stat">High</div>
+                    <div class="trip-d-note">The displacement is countable: stock platforms report human vs AI sales ratios. The premium (or its absence) is a market signal.</div>
+                    <div class="trip-visibility-bar"><span class="trip-vb-label">Visible</span><div class="trip-vb-track"><div class="trip-vb-fill" style="width:85%;background:#6B7F5C;"></div></div></div>
+                  </div>
+                  <div class="trip-detail-col">
+                    <div class="trip-d-label">Policy lever exists?</div>
+                    <div class="trip-d-stat">Yes</div>
+                    <div class="trip-d-note">EU AI Act mandates disclosure. Platforms can enforce it technically. Individual illustrators can verify and command a premium.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="trip-detail" id="trip-detail-1">
+                <div class="trip-detail-inner">
+                  <div class="trip-detail-col">
+                    <div class="trip-d-label">Mechanism of harm</div>
+                    <div class="trip-d-stat">Pool dilution</div>
+                    <div class="trip-d-note">Every stream draws from one shared royalty pool. Each AI listen reduces the per-stream rate for human artists — even when their play counts hold steady.</div>
+                  </div>
+                  <div class="trip-detail-col highlight">
+                    <div class="trip-d-label">Visibility score</div>
+                    <div class="trip-d-stat">Medium</div>
+                    <div class="trip-d-note">The dilution is measurable but indirect. Artists see falling royalty rates without a clear cause. DSPs can expose the AI share of streams — some are beginning to.</div>
+                    <div class="trip-visibility-bar"><span class="trip-vb-label">Visible</span><div class="trip-vb-track"><div class="trip-vb-fill" style="width:54%;background:#D4906B;"></div></div></div>
+                  </div>
+                  <div class="trip-detail-col">
+                    <div class="trip-d-label">Policy lever exists?</div>
+                    <div class="trip-d-stat">Emerging</div>
+                    <div class="trip-d-note">Deezer's separate AI library is the first structural response. If adopted broadly, it breaks the shared pool and stops the dilution — but requires platform buy-in.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="trip-detail" id="trip-detail-2">
+                <div class="trip-detail-inner">
+                  <div class="trip-detail-col">
+                    <div class="trip-d-label">Mechanism of harm</div>
+                    <div class="trip-d-stat">Silent exit</div>
+                    <div class="trip-d-note">The client simply stops commissioning. No cancellation notice, no public switch announcement. The writer loses work without knowing why. Nothing is logged.</div>
+                  </div>
+                  <div class="trip-detail-col highlight">
+                    <div class="trip-d-label">Visibility score</div>
+                    <div class="trip-d-stat" style="color:var(--rust)">Near zero</div>
+                    <div class="trip-d-note">Upwork data shows writing projects fell 32% year-on-year. But the cause is invisible at the individual level — each empty inbox is anecdote, not evidence.</div>
+                    <div class="trip-visibility-bar"><span class="trip-vb-label">Visible</span><div class="trip-vb-track"><div class="trip-vb-fill" style="width:12%;background:#B45F3D;"></div></div></div>
+                  </div>
+                  <div class="trip-detail-col">
+                    <div class="trip-d-label">Policy lever exists?</div>
+                    <div class="trip-d-stat">No</div>
+                    <div class="trip-d-note">You cannot mandate a label on text. A prompt-and-edit and a full write are both "AI-assisted." No regulation can distinguish them, so no policy can address the displacement.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="trip-caption">Click any panel to expand — visibility determines whether policy can respond</div>
+            </div>
+
+            <script>
+            (() => {
+              let openIdx = -1;
+              window.openTripPanel = function(i) {
+                const panels = document.querySelectorAll('.trip-panel');
+                const details = document.querySelectorAll('.trip-detail');
+                if (openIdx === i) {
+                  details[i].classList.remove('open');
+                  panels[i].classList.remove('active');
+                  openIdx = -1;
+                  return;
+                }
+                details.forEach((d, j) => { d.classList.remove('open'); panels[j].classList.remove('active'); });
+                details[i].classList.add('open');
+                panels[i].classList.add('active');
+                openIdx = i;
+              };
+            })();
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fork">
+      <div class="section-intro">
+        <span class="label">05 — The Fork</span>
+        <h2>Mid-2027</h2>
+      </div>
+
+      <div class="prose">
+        <p>By mid-2027, AI produces work indistinguishable from human work in all three domains, and EU labeling has been in force a full year. The decisive question is what the US does next: follow with disclosure and provenance rules, or treat AI content like most commercial speech, with little federal regulation.</p>
+
+        <p>It is the same kind of fork the AI 2027 scenario describes, turning on who holds power in Washington, what they lose if regulation slows AI, and how visible the damage has become. At bottom it is whether American institutions build the language to tell instrumental work from expressive work, and whether enough powerful people believe the distinction is worth protecting.</p>
+      </div>
+
+      <div class="fork-viz">
+        <svg class="fork-svg" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="300" y1="20" x2="300" y2="100" stroke="#1A1816" stroke-width="2"/>
+          <line x1="300" y1="100" x2="150" y2="180" stroke="#6B7F5C" stroke-width="2" stroke-dasharray="0"/>
+          <line x1="300" y1="100" x2="450" y2="180" stroke="#B45F3D" stroke-width="2" stroke-dasharray="0"/>
+          <circle cx="300" cy="100" r="6" fill="#1A1816"/>
+          <text x="300" y="14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#6B6661" letter-spacing="1.5">MID-2027</text>
+          <text x="150" y="200" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#6B7F5C" letter-spacing="1.5">PATH A · REGULATED</text>
+          <text x="450" y="200" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#B45F3D" letter-spacing="1.5">PATH B · MARKET</text>
+        </svg>
+
+        <div class="fork-paths">
+          <a href="#path-a" class="fork-path-card path-a">
+            <div class="path-tag">Path A · Regulated</div>
+            <div class="path-title">A managed outcome.</div>
+            <div class="path-summary">The US passes rules. Verified-human certification spreads. A smaller, more stratified creative class survives around verified authorship, curation, and live performance.</div>
+          </a>
+          <a href="#path-b" class="fork-path-card path-b">
+            <div class="path-tag">Path B · Market</div>
+            <div class="path-title">A remnant economy.</div>
+            <div class="path-summary">The US declines to act. Platforms become producers. Median creator income collapses. The expressive layer survives as a niche, funded by philanthropy and private wealth.</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="path-a" class="path-a">
+      <div class="section-intro">
+        <span class="label">06 — Path A</span>
+        <h2>The Regulated Path, 2027–2030</h2>
+        <span class="path-marker">Sage line</span>
+      </div>
+
+      <div class="prose">
+        <p>The US passes rules comparable to the EU AI Act: machine-readable labels, platform liability for unlabeled commercial AI content, and a framework for paying creators when their work trains models, modeled loosely on music royalties.</p>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q3 2027</span>
+            <span class="quarter-title">Verified-human certification spreads</span>
+          </div>
+          <p>Led by publishing, where the Authors Guild has been building infrastructure for years; music and visual art follow. Content Credentials become recognizable the way "organic" did on food labels. The certification does not promise the work is good, only that a human made it. For the first time, the instrumental / expressive difference has formal recognition: platforms can show it, consumers can choose on it, creators can charge for it.</p>
+        </div>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q4 2027</span>
+            <span class="quarter-title">The bottleneck shifts</span>
+          </div>
+          <p>The technical question is essentially closed. AI generates indistinguishable work at industrial scale. The scarce thing is no longer making something but knowing what is worth making and for whom. Curators, editors, and directors with reputations for taste become valuable again. The tools handle execution; what remains is deciding what to make, for whom, and why.</p>
+        </div>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">2028–2030</span>
+            <span class="quarter-title">A new equilibrium</span>
+          </div>
+          <p>The creative economy is smaller and more divided between high-end verified human work and cheap automated content, but functional. A working creative class survives, not superstars or hobbyists but specialists in verified authorship, curation, and live performance. Median author income stops falling without returning to 2022 levels. Human artists' royalties are protected by a separate pool, and illustrators find verified work commands a premium in luxury and editorial markets, for those who can reach them. Path A is not a happy ending. It is a managed outcome, where losses are spread and the people still working are fewer but not gone.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="path-b" class="path-b">
+      <div class="section-intro">
+        <span class="label">07 — Path B</span>
+        <h2>The Market Path, 2027–2030</h2>
+        <span class="path-marker">Rust line</span>
+      </div>
+
+      <div class="prose">
+        <p>The US passes no federal rules. State laws (California's SB 942, Tennessee's ELVIS Act) cover too little to cohere. C2PA stays voluntary. Open-source models, recompilable without watermarking, break whatever labeling the commercial providers build.</p>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q3 2027</span>
+            <span class="quarter-title">The preference gap widens</span>
+          </div>
+          <p>NPR and Luminate found people react negatively to AI music when they know it is AI. But streaming data tells a different story: when the algorithm picks the next song, the listener rarely faces a choice at all. This is not irrationality but design. A premium cannot form if the consumer is never asked.</p>
+        </div>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">Q4 2027</span>
+            <span class="quarter-title">Platforms become producers</span>
+          </div>
+          <p>AI agents sustain creative projects lasting weeks. Streaming and publishing platforms stop being middlemen: a music service need not pay artists if it can generate songs per listener in real time; a publisher need not acquire manuscripts if it can produce genre fiction to order at near-zero cost. The working creative middle (illustrators, session musicians, mid-list authors, freelance journalists) loses its place entirely.</p>
+        </div>
+
+        <div class="forecast-quarter">
+          <div class="quarter-header">
+            <span class="quarter-label">2028–2030</span>
+            <span class="quarter-title">A remnant economy</span>
+          </div>
+          <p>Median creator income collapses. The Authors Guild's $23,329 full-time figure is roughly halved in real terms. Stock illustration, concept art, commercial design, and routine writing are nearly fully automated. Mid-tier musicians find live performance the only reliable income, but performance needs an audience, and audiences are built through recorded work now competing with infinite free alternatives. What remains concentrates in a few platforms and IP holders with old catalogues to train on and channels to distribute through.</p>
+
+          <p class="pull-quote">The expressive layer does not vanish. But it is no longer an economy. It is a remnant.</p>
+        </div>
+      </div>
+
+      <div class="viz-container" id="viz-path-compare">
+        <style>
+          .pc-wrap { font-family: var(--font-mono); background: transparent; color: var(--ink); }
+          .pc-metric-tabs { display: flex; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-bottom: 1.5rem; }
+          .pc-tab { flex: 1; padding: 0.6rem 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; background: var(--paper); color: var(--ink-mute); border: none; cursor: pointer; transition: all 0.2s; }
+          .pc-tab:hover { background: var(--paper-shade); color: var(--ink); }
+          .pc-tab.active { background: var(--ink); color: var(--paper); }
+          .pc-chart-area { position: relative; }
+          .pc-path-labels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+          .pc-path-label { padding: 0.75rem 1rem; border-left: 3px solid; }
+          .pc-path-label.a { border-color: var(--sage); }
+          .pc-path-label.b { border-color: var(--rust); }
+          .pc-pl-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+          .pc-pl-tag.a { color: var(--sage); }
+          .pc-pl-tag.b { color: var(--rust); }
+          .pc-pl-stat { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.2rem; }
+          .pc-pl-note { font-size: 0.68rem; color: var(--ink-mute); line-height: 1.45; font-style: italic; }
+          .pc-caption { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); text-align: center; margin-top: 1rem; }
+        </style>
+
+        <div class="pc-wrap">
+          <div class="pc-metric-tabs" id="pc-tabs">
+            <button class="pc-tab active" data-metric="0">Median creator income</button>
+            <button class="pc-tab" data-metric="1">Market concentration</button>
+            <button class="pc-tab" data-metric="2">Expressive premium</button>
+          </div>
+
+          <div class="pc-chart-area">
+            <canvas id="pc" style="display:block;width:100%;height:280px;"></canvas>
+          </div>
+
+          <div class="pc-path-labels" id="pc-path-labels"></div>
+          <div class="pc-caption">Select a metric — Path A (regulated) vs Path B (market) projected to 2030</div>
+        </div>
+
+        <script>
+        (() => {
+          const labels = ['2022','2023','2024','2025','2026','2027','2028','2029','2030'];
+          const fork = 5;
+
+          const metrics = [
+            {
+              title: 'Median creator income (USD, indexed to 2022)',
+              shared: [23329, 22100, 20400, 18800, 17200],
+              pathA:  [null,null,null,null,null, 16800, 17200, 17900, 18600],
+              pathB:  [null,null,null,null,null, 15600, 13100, 11200, 9800],
+              unitA: '$18,600', noteA: 'Stabilises as verified-human premium offsets volume loss. Floor is set, not comfortable.',
+              unitB: '$9,800',  noteB: 'Roughly halved in real terms vs 2022. Mid-tier roles (illustrators, session musicians, mid-list authors) largely automated.',
+              format: v => '$'+Math.round(v).toLocaleString(),
+            },
+            {
+              title: 'Top-4 platform revenue share of creative market (%)',
+              shared: [52, 56, 61, 66, 71],
+              pathA:  [null,null,null,null,null, 73, 74, 74, 73],
+              pathB:  [null,null,null,null,null, 76, 82, 87, 91],
+              unitA: '73%', noteA: 'Regulation caps further consolidation. Smaller licensed platforms remain viable. Concentration plateaus.',
+              unitB: '91%', noteB: 'Without platform liability, major players generate content internally. Independent markets collapse.',
+              format: v => Math.round(v)+'%',
+            },
+            {
+              title: 'Human-verified work premium over AI equivalent (%)',
+              shared: [null,null,null,null, 8],
+              pathA:  [null,null,null,null,null, 18, 28, 34, 38],
+              pathB:  [null,null,null,null,null, 11, 7, 4, 2],
+              unitA: '+38%', noteA: 'Content Credentials become recognisable. Premium grows as scarcity signal strengthens. Illustrators and authors with certification command editorial rates.',
+              unitB: '+2%',  noteB: 'Without disclosure mandates, the label is never shown. Preference cannot translate to price. Premium effectively disappears.',
+              format: v => '+'+Math.round(v)+'%',
+            },
+          ];
+
+          const sage = '#6B7F5C', rust = '#B45F3D';
+          let pcChart, activeMetric = 0;
+
+          function buildDatasets(m) {
+            const shared = labels.map((_, i) => i < fork ? (m.shared[i] ?? null) : null);
+            const bridgeA = labels.map((_, i) => {
+              if (i === fork-1) return m.shared[fork-1];
+              if (i === fork) return m.pathA[fork] ?? m.shared[fork];
+              return null;
+            });
+            const bridgeB = labels.map((_, i) => {
+              if (i === fork-1) return m.shared[fork-1];
+              if (i === fork) return m.pathB[fork] ?? m.shared[fork];
+              return null;
+            });
+            const pA = labels.map((_, i) => i >= fork ? (m.pathA[i] ?? null) : null);
+            const pB = labels.map((_, i) => i >= fork ? (m.pathB[i] ?? null) : null);
+
+            return [
+              { label:'Baseline', data:shared, borderColor:'#A8A29A', borderWidth:2, pointRadius:3, pointBackgroundColor:'#A8A29A', fill:false, tension:0.3, spanGaps:false },
+              { label:'→ Path A', data:bridgeA, borderColor:sage, borderWidth:1.5, borderDash:[3,2], pointRadius:0, fill:false, tension:0.3, spanGaps:true },
+              { label:'→ Path B', data:bridgeB, borderColor:rust, borderWidth:1.5, borderDash:[3,2], pointRadius:0, fill:false, tension:0.3, spanGaps:true },
+              { label:'Path A (regulated)', data:pA, borderColor:sage, borderWidth:2.5, pointRadius:3, pointBackgroundColor:sage, fill:false, tension:0.3, spanGaps:false },
+              { label:'Path B (market)',    data:pB, borderColor:rust, borderWidth:2.5, pointRadius:3, pointBackgroundColor:rust, fill:false, tension:0.3, spanGaps:false },
+            ];
+          }
+
+          function updateLabels(m) {
+            document.getElementById('pc-path-labels').innerHTML = `
+              <div class="pc-path-label a">
+                <div class="pc-pl-tag a">Path A · Regulated · 2030</div>
+                <div class="pc-pl-stat">${m.unitA}</div>
+                <div class="pc-pl-note">${m.noteA}</div>
+              </div>
+              <div class="pc-path-label b">
+                <div class="pc-pl-tag b">Path B · Market · 2030</div>
+                <div class="pc-pl-stat">${m.unitB}</div>
+                <div class="pc-pl-note">${m.noteB}</div>
+              </div>`;
+          }
+
+          function initChart() {
+            const ctx = document.getElementById('pc').getContext('2d');
+            const m = metrics[0];
+            pcChart = new Chart(ctx, {
+              type:'line',
+              data:{ labels, datasets: buildDatasets(m) },
+              options:{
+                responsive:true, maintainAspectRatio:false,
+                interaction:{ mode:'index', intersect:false },
+                plugins:{
+                  legend:{ display:false },
+                  annotation: {},
+                  tooltip:{
+                    backgroundColor:'#1A1816',
+                    titleFont:{family:"'JetBrains Mono'",size:10},
+                    bodyFont:{family:"'JetBrains Mono'",size:10},
+                    padding:10,
+                    filter: item => item.parsed.y !== null,
+                    callbacks:{ label: ctx => '  '+ ctx.dataset.label +': '+ m.format(ctx.parsed.y) }
+                  }
+                },
+                scales:{
+                  x:{ grid:{color:'#D9D2C520'}, ticks:{font:{family:"'JetBrains Mono'",size:9},color:'#6B6661'} },
+                  y:{ grid:{color:'#D9D2C530'}, ticks:{font:{family:"'JetBrains Mono'",size:9},color:'#6B6661', callback: v => metrics[activeMetric].format(v)} }
+                },
+                animation:{ duration:500 }
+              }
+            });
+
+            pcChart.options.plugins.annotation = {
+              annotations:{
+                fork:{
+                  type:'line', xMin: fork-0.5, xMax: fork-0.5,
+                  borderColor:'#1A181640', borderWidth:1, borderDash:[4,3],
+                  label:{ content:'Fork · Mid-2027', enabled:true, position:'start',
+                    font:{family:"'JetBrains Mono'",size:8}, color:'#6B6661',
+                    backgroundColor:'transparent', padding:4 }
+                }
+              }
+            };
+          }
+
+          function switchMetric(i) {
+            activeMetric = i;
+            document.querySelectorAll('.pc-tab').forEach((t,j) => t.classList.toggle('active', j===i));
+            const m = metrics[i];
+            pcChart.data.datasets = buildDatasets(m);
+            pcChart.options.plugins.tooltip.callbacks.label = ctx => '  '+ ctx.dataset.label +': '+ m.format(ctx.parsed.y);
+            pcChart.options.scales.y.ticks.callback = v => m.format(v);
+            pcChart.update();
+            updateLabels(m);
+          }
+
+          document.getElementById('pc-tabs').addEventListener('click', e => {
+            const tab = e.target.closest('.pc-tab');
+            if (tab) switchMetric(parseInt(tab.dataset.metric));
+          });
+
+          initChart();
+          updateLabels(metrics[0]);
+        })();
+        </script>
+      </div>
+    </section>
+
+    <section id="policy">
+      <div class="section-intro">
+        <span class="label">08 — Policy</span>
+        <h2>Markets, information, and power</h2>
+      </div>
+
+      <div class="prose">
+        <p>The choices that determine the path are about markets, information, and power more than about AI.</p>
+
+        <h4>Provenance disclosure</h4>
+        <p>Gives consumers real information. The unresolved question is what counts as AI-generated: drawn too broadly, it stigmatizes the 45% of Authors Guild members already using AI tools; too narrowly, the label is meaningless.</p>
+
+        <h4>Training-data compensation</h4>
+        <p>Addresses collective action. Individuals cannot negotiate with OpenAI; collective licensing, like ASCAP and BMI for performance rights, could internalize the externality. The unintended consequence: smaller AI firms cannot afford licensing, accelerating concentration in AI development itself.</p>
+
+        <h4>Platform regulation</h4>
+        <p>Addresses the music problem. If algorithms decide what listeners hear and provenance stays buried in metadata, the market never transmits preference. The trade-off is platform autonomy and the difficulty of enforcing interface design across jurisdictions.</p>
+
+        <h4>Public funding</h4>
+        <p>Treats expressive work as a public good. The argument is not that the market failed but that it was never built to value what expressive work produces: a shared symbolic vocabulary, a record of what it felt like to be human at a moment. The trade-off is the politics of subsidy and the risk that funding shapes what gets made.</p>
+
+        <p>None suffices alone; none is costless. The question is which combination, at what moment, is implementable by institutions slower than the technology they govern.</p>
+
+        <div class="viz-container" id="viz-policy">
+          <style>
+            .pm-wrap { font-family: var(--font-mono); background: transparent; color: var(--ink); }
+            .pm-matrix-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+            .pm-matrix-header { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr; gap: 1px; background: var(--line); }
+            .pm-mh-cell { background: var(--paper-shade); padding: 0.5rem 0.75rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-mute); }
+            .pm-mh-cell:first-child { color: var(--ink); }
+            .pm-matrix-row { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr; gap: 1px; background: var(--line); cursor: pointer; transition: background 0.15s; }
+            .pm-matrix-row:hover .pm-mr-cell { background: var(--paper-shade); }
+            .pm-matrix-row.active .pm-mr-cell { background: var(--rust-faint); }
+            .pm-mr-cell { background: var(--paper); padding: 0.6rem 0.75rem; display: flex; align-items: center; }
+            .pm-mr-cell:first-child { font-size: 0.75rem; font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
+            .pm-dot-wrap { display: flex; gap: 3px; align-items: center; }
+            .pm-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+            .pm-dot.fill { background: var(--rust); }
+            .pm-dot.half { background: var(--rust-soft); }
+            .pm-dot.empty { background: var(--line); }
+            .pm-detail-panel { display: none; background: var(--paper-shade); border-top: 1px solid var(--line); }
+            .pm-detail-panel.open { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+            .pm-dp-col { padding: 1rem 1.25rem; }
+            .pm-dp-col+.pm-dp-col { border-left: 1px solid var(--line); }
+            .pm-dp-tag { font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.13em; margin-bottom: 0.4rem; }
+            .pm-dp-tag.tension { color: var(--rust); }
+            .pm-dp-tag.tradeoff { color: var(--ink-mute); }
+            .pm-dp-title { font-family: var(--font-display); font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+            .pm-dp-body { font-size: 0.7rem; color: var(--ink-soft); line-height: 1.55; font-style: italic; }
+            .pm-legend-row { display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
+            .pm-leg { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); }
+            .pm-caption { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); text-align: center; margin-top: 1rem; }
+
+            @media(max-width: 600px) {
+              .pm-matrix-header, .pm-matrix-row { grid-template-columns: 1fr; }
+              .pm-mh-cell:not(:first-child) { display: none; }
+              .pm-mr-cell:not(:first-child) { display: none; }
+              .pm-detail-panel.open { grid-template-columns: 1fr; }
+              .pm-dp-col+.pm-dp-col { border-left: none; border-top: 1px solid var(--line); }
+            }
+          </style>
+
+          <div class="pm-wrap">
+            <div class="pm-legend-row">
+              <div class="pm-leg"><div class="pm-dot-wrap"><div class="pm-dot fill"></div><div class="pm-dot fill"></div><div class="pm-dot fill"></div></div>Strong effect</div>
+              <div class="pm-leg"><div class="pm-dot-wrap"><div class="pm-dot fill"></div><div class="pm-dot fill"></div><div class="pm-dot empty"></div></div>Moderate</div>
+              <div class="pm-leg"><div class="pm-dot-wrap"><div class="pm-dot fill"></div><div class="pm-dot empty"></div><div class="pm-dot empty"></div></div>Weak / indirect</div>
+              <div class="pm-leg" style="margin-left:auto;color:var(--ink-faint);font-size:0.63rem;">Click a row to expand</div>
+            </div>
+
+            <div class="pm-matrix-grid" id="pm-matrix">
+              <div class="pm-matrix-header">
+                <div class="pm-mh-cell">Policy intervention</div>
+                <div class="pm-mh-cell">Consumer info</div>
+                <div class="pm-mh-cell">Creator income</div>
+                <div class="pm-mh-cell">Market concentration</div>
+                <div class="pm-mh-cell">Feasibility</div>
+              </div>
+            </div>
+
+            <div class="pm-caption">Each row is a lever — ratings show what it addresses, not what it solves alone</div>
+          </div>
+
+          <script>
+          (() => {
+            const policies = [
+              {
+                name: 'Provenance disclosure', scores: [3, 1, 1, 2],
+                tension: { tag:'Tension it addresses', title:'The invisible choice', body:'Consumers say they value human-made work but cannot currently choose it. C2PA labeling gives them real information at the point of decision. Whether preference translates to purchase is the open test.' },
+                tradeoff: { tag:'Unintended consequence', title:'Label fatigue & over-breadth', body:'Drawn too broadly, the label stigmatises the 45% of Authors Guild members already using AI tools at some stage. Too narrowly, it is meaningless. The line between "AI-assisted" and "AI-generated" is political, not technical.' },
+              },
+              {
+                name: 'Training-data compensation', scores: [1, 3, 2, 1],
+                tension: { tag:'Tension it addresses', title:'The collective action failure', body:'Individual creators cannot negotiate with model developers. Collective licensing — modelled on ASCAP and BMI for performance rights — could internalise the externality that training on copyrighted work creates.' },
+                tradeoff: { tag:'Unintended consequence', title:'Accelerates AI concentration', body:'Licensing fees only large AI firms can afford. Startups and open-source projects are priced out. The policy that protects creators may consolidate AI development into the handful of players already dominating it.' },
+              },
+              {
+                name: 'Platform algorithm regulation', scores: [2, 2, 3, 1],
+                tension: { tag:'Tension it addresses', title:'The invisible preference problem', body:'When algorithms pick the next song, the listener is never asked. A provenance premium cannot form if consumers never face a choice. Platform regulation forces the choice into the interface.' },
+                tradeoff: { tag:'Unintended consequence', title:'Jurisdiction & design enforcement', body:'Interface requirements are hard to enforce across jurisdictions. A platform headquartered outside the EU need not comply. And defining what "showing the label" requires, in contrast with burying it in metadata, requires ongoing regulatory capacity that most agencies lack.' },
+              },
+              {
+                name: 'Public funding for expressive work', scores: [1, 2, 2, 2],
+                tension: { tag:'Tension it addresses', title:'The public-good gap', body:'Expressive work — the shared symbolic vocabulary, the record of what it felt like to be human — produces value that markets do not price. Public funding treats it as infrastructure, not commerce.' },
+                tradeoff: { tag:'Unintended consequence', title:'Funding shapes what gets made', body:'Subsidised art reflects the preferences of funders. The works most likely to receive grants are legible to grant committees, not necessarily to audiences. Public arts funding has always faced this tension; at scale it becomes structurally distorting.' },
+              },
+            ];
+
+            const dots = n => {
+              let h = '<div class="pm-dot-wrap">';
+              for(let i = 0; i < 3; i++) h += `<div class="pm-dot ${i < n ? 'fill' : 'empty'}"></div>`;
+              return h + '</div>';
+            };
+
+            let openRow = -1;
+            const grid = document.getElementById('pm-matrix');
+
+            policies.forEach((p, i) => {
+              const row = document.createElement('div');
+              row.className = 'pm-matrix-row';
+              row.innerHTML = `
+                <div class="pm-mr-cell">${p.name}</div>
+                <div class="pm-mr-cell">${dots(p.scores[0])}</div>
+                <div class="pm-mr-cell">${dots(p.scores[1])}</div>
+                <div class="pm-mr-cell">${dots(p.scores[2])}</div>
+                <div class="pm-mr-cell">${dots(p.scores[3])}</div>`;
+
+              const detail = document.createElement('div');
+              detail.className = 'pm-detail-panel';
+              detail.innerHTML = `
+                <div class="pm-dp-col">
+                  <div class="pm-dp-tag tension">${p.tension.tag}</div>
+                  <div class="pm-dp-title">${p.tension.title}</div>
+                  <div class="pm-dp-body">${p.tension.body}</div>
+                </div>
+                <div class="pm-dp-col">
+                  <div class="pm-dp-tag tradeoff">${p.tradeoff.tag}</div>
+                  <div class="pm-dp-title">${p.tradeoff.title}</div>
+                  <div class="pm-dp-body">${p.tradeoff.body}</div>
+                </div>`;
+
+              row.addEventListener('click', () => {
+                if (openRow === i) {
+                  detail.classList.remove('open');
+                  row.classList.remove('active');
+                  openRow = -1;
+                } else {
+                  document.querySelectorAll('.pm-detail-panel').forEach(d => d.classList.remove('open'));
+                  document.querySelectorAll('.pm-matrix-row').forEach(r => r.classList.remove('active'));
+                  detail.classList.add('open');
+                  row.classList.add('active');
+                  openRow = i;
+                }
+              });
+
+              grid.appendChild(row);
+              grid.appendChild(detail);
+            });
+          })();
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <section id="uncertainty">
+      <div class="section-intro">
+        <span class="label">09 — Uncertainty</span>
+        <h2>What I do not know</h2>
+      </div>
+
+      <div class="prose">
+        <p>This is an observed trajectory, not a model. The baseline is real but uneven: Spotify's payout is verifiable, Deezer's 34% is self-reported, the Otis job data is documented but its attribution disputed, and the Authors Guild and Upwork figures point the same way while measuring different things. Where data conflicts, I note it rather than resolve it.</p>
+
+        <p>The capability forecast draws on METR's autonomous-task-duration benchmark and the AI 2027 method of extrapolating from quantifiable progress. Both have limits. Capability curves do not always extrapolate smoothly, and there may be walls in audio coherence, narrative consistency, and emotional texture that are harder to scale than current trends suggest. I do not know where they are.</p>
+
+        <p>The deepest uncertainty is conceptual. The instrumental / expressive distinction is my framing, and it is contestable: what counts as expressive is socially constructed and may shift. If people raised on AI music do not value human origin as older listeners do, the provenance premium never forms, regardless of policy. I do not have a strong argument against this. <em>I have a hope against it, which is different.</em></p>
+
+        <p>On disclosure: this essay was developed with AI assistance at every stage; the final writing and all original claims are mine. I disclose this as evidence, not caveat. Writing about AI's impact on writing, with AI as a collaborator, is the most direct illustration I have of the ideation/execution distinction at my argument's centre. AI helped me think. It did not think for me. Whether that distinction stays meaningful, and whether the reader can tell, is exactly what this forecast is about.</p>
+      </div>
+    </section>
+
+    <section id="closing">
+      <div class="section-intro">
+        <span class="label">10 — Closing</span>
+      </div>
+
+      <div class="prose">
+        <p>The creative sector is not peripheral to the AI economy. It is where the economy's self-understanding is produced. Stories, images, and music are not merely outputs of civilization; they are how civilization thinks about itself.</p>
+
+        <p>The forecast predicts neither catastrophe nor salvation, but a fork and two plausible worlds beyond it. In one, the institutions around creative work learn to tell instrumental from expressive fast enough to preserve something worth keeping. In the other, they do not, and we learn what it means to live in a world more productive, more efficient, and somehow less inhabited.</p>
+
+        <p class="pull-quote">The question is not whether AI will reshape the creative economy. It already has. The question is whether we will notice what we are losing before it is gone, or only after.</p>
+      </div>
+
+      <div class="closing-artifact">
+        <div class="frame">
+          <div class="frame-text">an empty chair</div>
+        </div>
+        <p class="viz-caption" style="margin-top:var(--space-6);">Where the human used to be.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>ECON1626 · AI Future Forecast · Submitted May 2026</div>
+      <div>
+        <a href="index.html">Take the quiz</a>
+        &nbsp;·&nbsp;
+        <a href="about.html">Methods & references</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple split-screen interaction
+    document.querySelectorAll('#split-instrumental-expressive .split-side').forEach(side => {
+      side.addEventListener('click', () => {
+        document.querySelectorAll('#split-instrumental-expressive .split-side').forEach(s => s.classList.remove('voted'));
+        side.classList.add('voted');
+        side.querySelector('.split-vote').textContent = '✓ Your vote';
+      });
+    });
+  </script>
+</body>
+</html>
+
+```
